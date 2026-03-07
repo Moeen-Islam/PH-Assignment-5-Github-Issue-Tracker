@@ -3,9 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Github Issue Tracker | Home</title>
-</head>
-<body>
-    <p>Hello</p>
+    <title>Github Issue Tracker | Log In</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- Tailwind + DaisyUI  -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- Font Awesome -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        *{
+            font-family: "Geist", sans-serif;
+        }
+    </style>
+    </head>
+<body class="bg-[#F8FAFC] min-h-screen py-6 px-4">
+    <!-- header Section -->
+    <header class="">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between border-b-2 border-gray-200 px-4 sm:px-6 md:px-10 py-5 max-w-[1600px] mx-auto gap-4">
+            <div class="flex items-center gap-2 justify-center md:justify-start">
+                <img src="./assets/github-logo.png" class="w-7 h-7 sm:w-8 sm:h-8">
+                <h1 class="text-base sm:text-lg font-semibold">GitHub Issues Tracker</h1>
+            </div>
+            <div class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto">
+            <label class="input flex items-center gap-2 border border-gray-400 bg-white w-full sm:w-[250px]">
+                <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
+                <input type="text" class="grow outline-none" placeholder="Search issues..."/>
+            </label>
+
+            <!-- Button -->
+            <button class="btn btn-primary w-full sm:w-auto">
+                <i class="fa-solid fa-plus"></i> New Issue
+            </button>
+        </div>
+     </div>
+
+    </header>
+    <!-- header Section End-->
+
+
+
+     <!-- Main Section -->
+
+    <div class="max-w-[1100px] mx-auto">
+        <!--Filter Section-->
+     <section class="bg-white border-b-2 border-gray-200 rounded-lg p-4 mb-4 mt-[60px]">
+            <div class="flex gap-3">
+                <button id="allBtn" class="flex-1 btn btn-primary">All</button>
+                <button id="openBtn" class="flex-1 btn text-[#64748B] text-md">Open</button>
+                <button id="closedBtn" class="flex-1 btn text-[#64748B] text-md">Closed</button>
+            </div>
+    </section>
+
+     <!-- count Section -->
+    <section class="bg-white border rounded-lg p-5 mb-4">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+    
+    <div class="flex items-start gap-3">
+      <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">
+        <img src="./assets/Aperture.png" alt="">
+      </div>
+
+      <div>
+        <h2 class="text-xl font-semibold text-gray-900">
+          <span id="totalIssues">0</span> Issues
+        </h2>
+        <p class="text-sm text-gray-500">
+          Track and manage your project issues
+        </p>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-4 text-sm">
+      <div class="flex items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-green-500"></span>
+        <span class="text-gray-600">Open</span>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span>
+        <span class="text-gray-600">Closed</span>
+      </div>
+    </div>
+  </div>
+    </section>
+     <!-- count Section end -->
+
+     <!-- Body Cart -->
+    <section>
+      <div id="issuesContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
+    </section>
+     <!-- Body Cart end -->
+
+
+    </div>
+     <!-- Main Section End -->
+
+
+
+
+     <script src="./script.js"></script>
 </body>
 </html>
