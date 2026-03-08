@@ -28,6 +28,18 @@ function setActiveButton(type) {
     }
 
 
+    // btn filter
+function setFilter(type) {
+    currentFilter = type;
+    setActiveButton(type);
+    updateTotalCount();
+    renderIssues();
+}
+
+allBtn.addEventListener("click", () => setFilter("all"));
+openBtn.addEventListener("click", () => setFilter("open"));
+closedBtn.addEventListener("click", () => setFilter("closed"));
+
 
 // Fetch the data
 async function loadIssues() {
