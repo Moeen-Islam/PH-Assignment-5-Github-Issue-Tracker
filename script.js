@@ -1,18 +1,19 @@
 const loginForm = document.getElementById("loginForm");
 const usernameInput = document.getElementById("username");
 const passwordInput = document.getElementById("password");
-
 const usernameError = document.getElementById("usernameError");
 const passwordError = document.getElementById("passwordError");
 const loginError = document.getElementById("loginError");
 
-function showError(input, errorElement, message) {
+
+
+const showError= (input, errorElement, message) =>{
   input.classList.add("border-red-500");
   errorElement.textContent = message;
   errorElement.classList.remove("hidden");
 }
 
-function clearError(input, errorElement) {
+const clearError=(input, errorElement) =>{
   input.classList.remove("border-red-500");
   errorElement.textContent = "";
   errorElement.classList.add("hidden");

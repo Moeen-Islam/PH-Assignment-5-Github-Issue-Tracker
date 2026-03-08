@@ -27,7 +27,19 @@ const setActiveButton = (type) => {
         closedBtn.className = "w-[90px] sm:w-[120px] shrink-0 btn btn-primary text-white";
       }
     }
+    
+// Fetch the data
+async function loadIssues() {
+        loadingSpinner(true);
+        const response = await fetch(API_URLAll);
+        const data = await response.json();
 
+        issues = Array.isArray(data) ? data : (data.data || data.issues || []);
+        updateTotalCount();
+        renderIssues();
+}
+
+// loading spinner
 const loadingSpinner = (status) => {
     if(status==true){
       document.getElementById("loadingSpinner").classList.remove("hidden")
@@ -253,7 +265,6 @@ searchInput.addEventListener("input", function () {
 });
 
 
-
 // Cart Render
 const renderIssues=() => {
       const filteredIssues = getFilteredIssues();
@@ -325,15 +336,6 @@ openBtn.addEventListener("click", () => setFilter("open"));
 closedBtn.addEventListener("click", () => setFilter("closed"));
 
 
-// Fetch the data
-async function loadIssues() {
-        loadingSpinner(true);
-        const response = await fetch(API_URLAll);
-        const data = await response.json();
 
-        issues = Array.isArray(data) ? data : (data.data || data.issues || []);
-        updateTotalCount();
-        renderIssues();
-}
 setActiveButton("all");
 loadIssues();
