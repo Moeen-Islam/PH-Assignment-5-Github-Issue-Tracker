@@ -1,6 +1,7 @@
 
 let currentFilter = "all";
 const API_URLAll= "https://phi-lab-server.vercel.app/api/v1/lab/issues";
+const API_SEARCH = "https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=";
 let issues = [];
 
 // variable declear
@@ -9,7 +10,7 @@ const openBtn = document.getElementById("openBtn");
 const closedBtn = document.getElementById("closedBtn");
 const totalIssues = document.getElementById("totalIssues");
 const issuesContainer = document.getElementById("issuesContainer");
-const searchInput = document.getElementById("searchInput");
+const searchInput = document.getElementById("search-Input");
 
 
 // active btn Function
@@ -229,6 +230,27 @@ const displayIssueDetails = (issue) => {
   document.getElementById("my_modal").showModal();
 }
 
+
+// search Section
+
+async function searchIssuesByTitle(searchText) {
+    const response = await fetch(`${API_SEARCH}${encodeURIComponent(searchText)}`);
+    const data = await response.json();
+
+    issues = Array.isArray(data) ? data : (data.data || data.issues || []);
+    updateTotalCount();
+    renderIssues();
+   
+}
+searchInput.addEventListener("input", function () {
+  const searchText = searchInput.value.trim();
+
+  if (searchText === "") {
+    loadIssues();
+  } else {
+    searchIssuesByTitle(searchText);
+  }
+});
 
 
 
