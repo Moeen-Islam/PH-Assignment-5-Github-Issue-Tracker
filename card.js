@@ -13,7 +13,7 @@ const searchInput = document.getElementById("searchInput");
 
 
 // active btn Function
-function setActiveButton(type) {
+const setActiveButton = (type) => {
       allBtn.className = "w-[90px] sm:w-[120px] shrink-0 btn bg-white text-[#64748B]";
       openBtn.className = "w-[90px] sm:w-[120px] shrink-0 btn bg-white text-[#64748B]";
       closedBtn.className = "w-[90px] sm:w-[120px] shrink-0 btn bg-white text-[#64748B]";
@@ -27,13 +27,13 @@ function setActiveButton(type) {
       }
     }
 
- function normalizeStatus(status) {
+ const normalizeStatus= (status) => {
       if (!status) return "open";
       const value = status.toString().toLowerCase();
       return value === "closed" ? "closed" : "open";
     }
 
-     function formatLabels(labels) {
+const formatLabels = (labels) => {
       if (!Array.isArray(labels)) return [];
       return labels.map(label => {
         if (typeof label === "string") return label;
@@ -43,7 +43,7 @@ function setActiveButton(type) {
     }
 
 
-function getPriorityBadge(priority) {
+const getPriorityBadge= (priority) => {
   const value = (priority || "").toString().toLowerCase();
         if (value === "high") {
             return `<span class="text-[10px] leading-none px-3 py-1 rounded-full bg-red-50 text-red-500 border border-red-200 uppercase">HIGH</span>`;
@@ -54,19 +54,30 @@ function getPriorityBadge(priority) {
         return `<span class="text-[10px] leading-none px-3 py-1 rounded-full bg-slate-100 text-slate-500 border border-slate-300 uppercase">LOW</span>`;
 }
 
-  function getLabelBadge(label) {
+const getPriorityBadgeModal = (priority) => {
+      const value = (priority || "").toString().toLowerCase();
+        if (value === "high") {
+            return `<span class="text-[12px] leading-none px-4 py-1 rounded-full bg-red-400 text-white border border-red-200 uppercase">HIGH</span>`;
+        }
+        if (value === "medium") {
+            return `<span class="text-[12px] leading-none px-4 py-1 rounded-full bg-orange-400 text-white border border-orange-200 uppercase">MEDIUM</span>`;
+        }
+        return `<span class="text-[12px] leading-none px-4 py-1 rounded-full bg-slate-400 text-white border border-slate-300 uppercase">LOW</span>`;
+}
+
+const getLabelBadge= (label) => {
   const value = label.toLowerCase();
 
     if (value === "bug") {
-        return `<span class="text-[10px] leading-none px-2.5 py-1 rounded-full bg-red-50 text-red-500 border border-red-200 uppercase whitespace-nowrap">BUG</span>`;
+        return `<span class="text-[10px] leading-none px-2.5 py-1 rounded-full bg-red-100 text-red-500 border border-red-200 uppercase whitespace-nowrap">BUG</span>`;
     }
 
     if (value === "help wanted") {
-        return `<span class="text-[10px] leading-none px-2.5 py-1 rounded-full bg-amber-50 text-amber-600 border border-amber-300 uppercase whitespace-nowrap">HELP WANTED</span>`;
+        return `<span class="text-[10px] leading-none px-2.5 py-1 rounded-full bg-amber-100 text-amber-600 border border-amber-300 uppercase whitespace-nowrap">HELP WANTED</span>`;
     }
 
     if (value === "enhancement") {
-        return `<span class="text-[10px] leading-none px-2.5 py-1 rounded-full bg-green-50 text-green-600 border border-green-300 uppercase whitespace-nowrap">ENHANCEMENT</span>`;
+        return `<span class="text-[10px] leading-none px-2.5 py-1 rounded-full bg-green-100 text-green-600 border border-green-300 uppercase whitespace-nowrap">ENHANCEMENT</span>`;
     }
 
     if (value === "documentation") {
@@ -74,20 +85,21 @@ function getPriorityBadge(priority) {
     }
 
     if (value === "good first issue") {
-        return `<span class="text-[10px] leading-none px-2.5 py-1 rounded-full bg-blue-50 text-blue-600 border border-blue-300 uppercase whitespace-nowrap">GOOD FIRST ISSUE</span>`;
+        return `<span class="text-[10px] leading-none px-2.5 py-1 rounded-full bg-blue-100 text-blue-600 border border-blue-300 uppercase whitespace-nowrap">GOOD FIRST ISSUE</span>`;
     }
 
     return `<span class="text-[10px] leading-none px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 border border-slate-300 uppercase whitespace-nowrap">${label}</span>`;
     }
 
-   function getTopBorder(status) {
+
+const getTopBorder= (status) => {
       return normalizeStatus(status) === "closed"
         ? "border-t-[3px] border-t-purple-500"
         : "border-t-[3px] border-t-green-500";
     }
 
 // Status icon
-function getStatusIcon(status) {
+const getStatusIcon= (status) => {
       if (normalizeStatus(status) === "closed") {
         return `
           <span class="w-5 h-5 rounded-full border-s border-purple-300 flex items-center justify-center text-[12px] text-purple-500">
@@ -103,8 +115,26 @@ function getStatusIcon(status) {
       `;
     }
 
+const getStatusForModal = (status) => {
+      const value = (status || "").toLowerCase();
+
+      if (value === "closed") {
+        return `
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-600 text-white border border-purple-200 text-[12px] font-medium">
+            Closed
+          </span>
+        `;
+      }
+
+      return `
+        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-600 text-white border border-green-200 text-[12px] font-medium">
+          Opened
+        </span>
+      `;
+}
+
 // filter the card
-function getFilteredIssues() {
+const getFilteredIssues =() => {
       let filtered = issues;
 
       if (currentFilter !== "all") {
@@ -127,16 +157,73 @@ function getFilteredIssues() {
     }
 
 // Update count 
-function updateTotalCount() {
+const updateTotalCount= () => {
       const filteredIssues = getFilteredIssues();
       totalIssues.textContent = filteredIssues.length;
     }
+
+const loadModalDetails = async (id) => {
+  const url = `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`
+  const res = await fetch(url);
+  const data = await res.json()
+  displayIssueDetails(data.data)
+}
+
+const displayIssueDetails = (issue) => {
+  const modalBox = document.getElementById("modal-container");
+
+  document.getElementById("my_modal").showModal();
+
+  modalBox.innerHTML = `
+    <div class="p-8">
+      <h2 class="text-[32px] font-bold text-[#0F172A] leading-tight mb-3">
+        ${issue.title || "Untitled Issue"}
+      </h2>
+
+      <div class="flex flex-wrap items-center gap-3 text-sm text-[#64748B] mb-6">
+        <span>${getStatusForModal(issue.status)}</span>
+        <span>• Opened by ${issue.author || "unknown"}</span>
+        <span>• ${issue.createdAt ? new Date(issue.createdAt).toLocaleDateString() : "No date"}</span>
+      </div>
+
+      <div class="flex flex-wrap gap-2 mb-6">
+        ${issue.labels.map(label => getLabelBadge(label)).join("")}
+      </div>
+
+      <p class="text-[18px] leading-8 text-[#64748B] mb-6">
+        ${issue.description || "No description available."}
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-[#F8FAFC] rounded-lg p-5 mb-3">
+        <div>
+          <p class="text-sm text-[#64748B] mb-2">Assignee:</p>
+          <p class="text-[18px] font-semibold text-[#0F172A]">
+            ${issue.assignee || issue.author || "Unknown"}
+          </p>
+        </div>
+
+        <div>
+          <p class="text-sm text-[#64748B] mb-2">Priority:</p>
+          ${getPriorityBadgeModal(issue.priority)}
+        </div>
+      </div>
+
+      <div class="flex justify-end">
+        <form method="dialog">
+          <button class="btn btn-primary px-6">Close</button>
+        </form>
+      </div>
+    </div>
+  `;
+
+  document.getElementById("my_modal").showModal();
+}
 
 
 
 
 // Cart Render
-function renderIssues() {
+const renderIssues=() => {
       const filteredIssues = getFilteredIssues();
       issuesContainer.innerHTML = "";
 
@@ -156,7 +243,7 @@ function renderIssues() {
         card.className = `bg-white border border-gray-200 rounded-md overflow-hidden shadow-sm h-full flex flex-col ${getTopBorder(issue.status)}`;
 
         card.innerHTML = `
-            <div class="flex flex-col h-full min-h-80">
+            <div class="flex flex-col h-full min-h-80" onclick="loadModalDetails(${issue.id})">
                 
                 <div class="p-4 flex-1">
                 <div class="flex items-center justify-between mb-4">
@@ -189,7 +276,8 @@ function renderIssues() {
       });
     }
 
-
+    
+   
 
 
     // btn filter
@@ -203,6 +291,8 @@ function setFilter(type) {
 allBtn.addEventListener("click", () => setFilter("all"));
 openBtn.addEventListener("click", () => setFilter("open"));
 closedBtn.addEventListener("click", () => setFilter("closed"));
+
+
 
 
 // Fetch the data
