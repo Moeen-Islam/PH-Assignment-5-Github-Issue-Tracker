@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Github Issue Tracker | Log In</title>
+    <title>Github Issue Tracker | Home</title>
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,7 +25,7 @@
 <body class="bg-[#F8FAFC] min-h-screen py-6 px-4">
     <!-- header Section -->
     <header class="">
-      <div class="flex flex-col md:flex-row md:items-center md:justify-between border-b-2 border-gray-200 px-4 sm:px-6 md:px-10 py-5 max-w-[1600px] mx-auto gap-4">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between shadow-md shadow-gray-200 px-4 sm:px-6 md:px-10 py-5 max-w-[1600px] mx-auto gap-4">
             <div class="flex items-center gap-2 justify-center md:justify-start">
                 <img src="./assets/github-logo.png" class="w-7 h-7 sm:w-8 sm:h-8">
                 <h1 class="text-base sm:text-lg font-semibold">GitHub Issues Tracker</h1>
@@ -37,7 +37,7 @@
             </label>
 
             <!-- Button -->
-            <button class="btn btn-primary w-full sm:w-auto">
+            <button class="btn btn-primary w-full sm:w-auto" id="searchInput">
                 <i class="fa-solid fa-plus"></i> New Issue
             </button>
         </div>
@@ -52,16 +52,16 @@
 
     <div class="max-w-[1100px] mx-auto">
         <!--Filter Section-->
-    <section class="bg-white border-b-2 border-gray-200 rounded-lg p-4 mb-4 mt-[60px]">
-        <div class="flex flex-nowrap gap-2 sm:gap-3 overflow-x-auto">
-            <button id="allBtn" class="w-[90px] sm:w-[120px] shrink-0 btn btn-primary">All</button>
-            <button id="openBtn" class="w-[90px] sm:w-[120px] shrink-0 btn text-[#64748B] text-sm sm:text-md">Open</button>
-            <button id="closedBtn" class="w-[90px] sm:w-[120px] shrink-0 btn text-[#64748B] text-sm sm:text-md">Closed</button>
-        </div>
+      <section class="bg-white shadow-md shadow-gray-200 rounded-lg p-4 mb-4 mt-[60px]">
+      <div class="flex flex-nowrap gap-2 sm:gap-3">
+      <button id="allBtn" class="w-[90px] sm:w-[120px] shrink-0 btn btn-primary text-sm sm:text-md">All</button>
+      <button id="openBtn" class="w-[90px] sm:w-[120px] shrink-0 btn text-[#64748B] text-sm sm:text-md">Open</button>
+      <button id="closedBtn" class="w-[90px] sm:w-[120px] shrink-0 btn text-[#64748B] text-sm sm:text-md">Closed</button>
+      </div>
     </section>
 
      <!-- count Section -->
-    <section class="bg-white border rounded-lg p-5 mb-4">
+    <section class="bg-white shadow-md shadow-gray-200 rounded-lg p-5 mb-4">
     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
     
     <div class="flex items-start gap-3">
@@ -105,8 +105,12 @@
      <!-- Main Section End -->
 
 
+     
+     
 
 
-     <script src="./script.js"></script>
+
+    
+     <script src="./card.js"></script>
 </body>
 </html>
