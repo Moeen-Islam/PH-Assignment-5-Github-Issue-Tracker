@@ -27,6 +27,16 @@ const setActiveButton = (type) => {
       }
     }
 
+const loadingSpinner = (status) => {
+    if(status==true){
+      document.getElementById("loadingSpinner").classList.remove("hidden")
+      document.getElementById("issuesContainer").classList.add("hidden")
+    }else{
+      document.getElementById("issuesContainer").classList.remove("hidden")
+      document.getElementById("loadingSpinner").classList.add("hidden")
+    }
+}
+
  const normalizeStatus= (status) => {
       if (!status) return "open";
       const value = status.toString().toLowerCase();
@@ -233,6 +243,7 @@ const renderIssues=() => {
             No issues found.
           </div>
         `;
+        loadingSpinner(false);
         return;
       }
 
@@ -273,11 +284,10 @@ const renderIssues=() => {
             </div>
             `;
         issuesContainer.appendChild(card);
+        
       });
+      loadingSpinner(false);
     }
-
-    
-   
 
 
     // btn filter
@@ -293,10 +303,9 @@ openBtn.addEventListener("click", () => setFilter("open"));
 closedBtn.addEventListener("click", () => setFilter("closed"));
 
 
-
-
 // Fetch the data
 async function loadIssues() {
+        loadingSpinner(true);
         const response = await fetch(API_URLAll);
         const data = await response.json();
 
